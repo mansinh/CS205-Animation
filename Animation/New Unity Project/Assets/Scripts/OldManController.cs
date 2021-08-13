@@ -71,19 +71,23 @@ public class OldManController : MonoBehaviour
                 speed = Mathf.Min(runningSpeed, speed);
             }
             direction.Normalize();
+            currentDirection = Vector3.RotateTowards(currentDirection, direction, 5 * Time.deltaTime, 0.1f);
+            currentDirection.Normalize();
             direction = transform.TransformDirection(direction);
 
-            currentDirection = Vector3.RotateTowards(currentDirection, direction, 5*Time.deltaTime, 0.1f);
+            
             transform.position += Time.deltaTime * direction * speed* baseSpeed;
            
         }
         else if(speed>0){
             speed -= braking * Time.deltaTime;
-            speed = Mathf.Max(0,speed); 
-     
+            speed = Mathf.Max(0,speed);
+            currentDirection = Vector3.RotateTowards(currentDirection, Vector3.forward, 5 * Time.deltaTime, 0.1f);
+
         }
-        animController.SetFloat("speed", speed);
-        animController.SetFloat("direction", Vector3.SignedAngle(currentDirection,transform.forward, Vector3.up));
+        
+        animController.SetFloat("speedX", currentDirection.x * speed+2);
+        animController.SetFloat("speedZ", currentDirection.z * speed+2);
 
         print(Input.mousePosition);
         float rotate = 0;
