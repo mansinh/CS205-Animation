@@ -28,26 +28,26 @@ public class ScreenTransition : MonoBehaviour
 
     IEnumerator Delay(float delayTime)
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSecondsRealtime(delayTime);
         FadeIn();
     }
 
     IEnumerator FadeOutCoroutine()
     {
-        for (float i = 0; i <= transitionSpeed; i += Time.fixedDeltaTime)
+        for (float i = 0; i <= transitionSpeed; i += 0.01f)
         {
             fadeToBlackImage.color = new Color(0, 0, 0, i / transitionSpeed);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSecondsRealtime(0.01f);
         }
         fadeToBlackImage.color = new Color(0, 0, 0, 1);
     }
 
     IEnumerator FadeInCoroutine()
     {
-        for (float i = transitionSpeed; i >= 0; i -= Time.fixedDeltaTime)
+        for (float i = transitionSpeed; i >= 0; i -= 0.01f)
         {
             fadeToBlackImage.color = new Color(0, 0, 0, i / transitionSpeed);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSecondsRealtime(0.01f);
         }
         fadeToBlackImage.color = new Color(0, 0, 0, 0);
     }

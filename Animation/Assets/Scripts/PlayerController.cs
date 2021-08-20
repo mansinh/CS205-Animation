@@ -46,25 +46,27 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         // Apply gravity to player
         verticalSpeed -= gravity * Time.fixedDeltaTime;
         charController.Move(verticalSpeed * Time.fixedDeltaTime * Vector3.up);
+
 
         if (charController.isGrounded && !isGrounded) {
             StartCoroutine(Land());
         }
         // Check if player is grounded
         isGrounded = charController.isGrounded;
-        animController.SetBool("isGrounded", charController.isGrounded);
-
+        
 
     }
 
     void Update()
     {
-        MovementControl();
-        CameraControl();
+        if (Time.timeScale > 0)
+        {
+            MovementControl();
+            CameraControl();
+        }
     }
 
     //*****************************************************************************************************
@@ -130,19 +132,23 @@ public class PlayerController : MonoBehaviour
     IEnumerator Jump()
     {
         animController.SetTrigger("jump");
-        yield return new WaitForSeconds(0.2f);
+        verticalSpeed = 0;
+        yield return new WaitForSeconds(0.3f);
         verticalSpeed = jumpSpeed;
-        isJumping = false;
+        
         charController.Move(verticalSpeed * Time.deltaTime * Vector3.up);
-        animController.SetBool("isGrounded", charController.isGrounded);
+       
     }
 
-    // Apply cooldown for jumping after landing
+    // Triggers when landing
     IEnumerator Land()
     {
+        animController.SetBool("isLanding", true);
         isLanding = true;
-        yield return new WaitForSeconds(0.2f);    
-        isLanding = false;    
+        isJumping = false;
+        yield return new WaitForSeconds(0.3f);    
+        isLanding = false;
+        animController.SetBool("isLanding", false);
     }
 
 

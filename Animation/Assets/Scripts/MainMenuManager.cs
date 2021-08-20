@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] GameObject optionsMenu;
-    [SerializeField] GameObject mainMenu;
-    [SerializeField] GameObject quitDialog;
+    [SerializeField] UIGroup optionsMenu;
+    [SerializeField] UIGroup mainMenu;
+    [SerializeField] UIGroup quitDialog;
     [SerializeField] Material backgroundMaterial;
     [SerializeField] ScreenTransition transition;
     [SerializeField] float backgroundSpeedX = 0.1f;
@@ -17,19 +17,23 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] float transitionDuration = 0.3f;
     Vector2 offset = new Vector2(0,0);
 
+    private void Start()
+    {
+        mainMenu.SlideIn();
+    }
     //*****************************************************************************************************
     // On button presses
     //*****************************************************************************************************
 
     public void OnOptions()
     {
-        StartCoroutine(SlideTo(mainMenu.transform, new Vector3(-100,0,0), transitionDuration));
-        StartCoroutine(SlideTo(optionsMenu.transform, new Vector3(0, 0, 0), transitionDuration));
+        mainMenu.SlideOut();
+        optionsMenu.SlideIn();
     }
 
     public void OnBack() {
-        StartCoroutine(SlideTo(mainMenu.transform, new Vector3(0, 0, 0), transitionDuration));
-        StartCoroutine(SlideTo(optionsMenu.transform, new Vector3(-100, 0, 0), transitionDuration));
+        mainMenu.SlideIn();
+        optionsMenu.SlideOut();
     }
 
     public void OnStart() {
@@ -40,7 +44,8 @@ public class MainMenuManager : MonoBehaviour
     public void OnQuit()
     {
         animController.SetTrigger("pray");
-        StartCoroutine(SlideTo(quitDialog.transform, new Vector3(0, -20, 0), transitionDuration));
+        mainMenu.SlideOut();
+        quitDialog.SlideIn();
     }
 
     public void QuitYes()
@@ -52,7 +57,8 @@ public class MainMenuManager : MonoBehaviour
     public void QuitNo()
     {
         animController.SetTrigger("excited");
-        StartCoroutine(SlideTo(quitDialog.transform, new Vector3(0, -200, 0), transitionDuration));
+        quitDialog.SlideOut();
+        mainMenu.SlideIn();
     }
 
 
@@ -65,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
         transition.FadeOut();
         yield return new WaitForSeconds(2);
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
     // Fade to black then start game
@@ -74,23 +80,6 @@ public class MainMenuManager : MonoBehaviour
         transition.FadeOut();
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Desert");
-    }
-
-    //*****************************************************************************************************
-    // Animations
-    //*****************************************************************************************************
-
-    
-
-    // Slide a gameobject to a position
-    IEnumerator SlideTo(Transform t, Vector3 endPosition, float duration)
-    {
-        Vector3 startPosition = t.transform.localPosition;
-        for (float i = 0; i <= duration; i += Time.fixedDeltaTime)
-        {
-            t.localPosition = Vector3.Lerp(startPosition, endPosition, Mathf.Pow(i / duration, 3));
-            yield return new WaitForFixedUpdate();
-        }
     }
 
     private void Update()

@@ -30,7 +30,7 @@ public class Foot : MonoBehaviour
                 // Emit burst of sand particles
                 sand.Play();
             }
-            if (controller.isJumping || controller.isLanding) {
+            if (controller.verticalSpeed>0 || controller.isLanding) {
                 // Emit burst of sand particles
                 sand.transform.localScale = 3 * Vector3.one;
                 sand.Play();
