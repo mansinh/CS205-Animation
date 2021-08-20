@@ -54,11 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Foot.cs" />
+    <Compile Include="Assets\Scripts\UIGroup.cs" />
+    <Compile Include="Assets\Scripts\HUD.cs" />
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ScreenTransition.cs" />
-    <Compile Include="Assets\Scripts\HUD.cs" />
-    <Compile Include="Assets\Scripts\UIGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

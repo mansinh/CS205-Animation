@@ -43,15 +43,27 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
     public bool isLanding = false;
     bool isGrounded = true;
-
+    float jumpBuildup = 0;
     private void FixedUpdate()
     {
         // Apply gravity to player
-        verticalSpeed -= gravity * Time.fixedDeltaTime;
-        charController.Move(verticalSpeed * Time.fixedDeltaTime * Vector3.up);
+        
+        if (isJumping)
+        {
+            // Build up jump then apply vertical speed
+            verticalSpeed = 0;
+            jumpBuildup += Time.fixedDeltaTime;
+            if (jumpBuildup > 0.2f)
+            {
+                Jump();
+            }
+        }
+        else {
+            verticalSpeed -= gravity * Time.fixedDeltaTime;
+            charController.Move(verticalSpeed * Time.fixedDeltaTime * Vector3.up);
+        }
 
-
-        if (charController.isGrounded && !isGrounded) {
+        if (charController.isGrounded && !isGrounded && !isJumping) {
             StartCoroutine(Land());
         }
         // Check if player is grounded
@@ -69,16 +81,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+   
+
     //*****************************************************************************************************
     // Move character by player input (jump, walk and run)
     //*****************************************************************************************************
     void MovementControl() {
         // Jump if the jump button pressed and character is on the ground
-        if (Input.GetButton("Jump") && charController.isGrounded && !isJumping && !isLanding)
+        if (Input.GetButtonUp("Jump") && charController.isGrounded && !isJumping && !isLanding)
         {
             isJumping = true;
-            StartCoroutine(Jump());
+            animController.SetTrigger("jump");          
         }
+        
 
         // Read direction from player input (WASD/directional keys/left joystick)
         direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -129,15 +144,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Apply vertical jump speed after some delay (build up jump animation)
-    IEnumerator Jump()
+    void Jump()
     {
-        animController.SetTrigger("jump");
-        verticalSpeed = 0;
-        yield return new WaitForSeconds(0.3f);
-        verticalSpeed = jumpSpeed;
-        
+        verticalSpeed = jumpSpeed; 
         charController.Move(verticalSpeed * Time.deltaTime * Vector3.up);
-       
+        jumpBuildup = 0;
+        isJumping = false;
     }
 
     // Triggers when landing
@@ -145,7 +157,7 @@ public class PlayerController : MonoBehaviour
     {
         animController.SetBool("isLanding", true);
         isLanding = true;
-        isJumping = false;
+       
         yield return new WaitForSeconds(0.3f);    
         isLanding = false;
         animController.SetBool("isLanding", false);
@@ -184,8 +196,13 @@ public class PlayerController : MonoBehaviour
             rotate = turnSpeed*fromCenter * Time.deltaTime;
         }   
         transform.RotateAround(transform.position, Vector3.up, rotate);
-        Vector3 e = transform.eulerAngles;
-        transform.eulerAngles = new Vector3(e.x,e.y,-fromCenter*speed*speed*20);
+
+        // If on ground, moving and turning, lean into turn
+        if (isGrounded)
+        {
+            Vector3 e = transform.eulerAngles;
+            transform.eulerAngles = new Vector3(e.x, e.y, -fromCenter * speed * speed * 20);
+        }
 
         // Shuffle feet animation if rotating on the spot
         

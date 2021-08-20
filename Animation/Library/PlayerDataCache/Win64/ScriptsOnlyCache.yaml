@@ -55,12 +55,9 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    Unity.Timeline.Editor.dll:
-    - TimelinePreferences
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationBlendTree.Node
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
@@ -176,81 +173,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3422}
     - Class: 114
-      Script: {instanceID: 3552}
+      Script: {instanceID: 3468}
     - Class: 114
-      Script: {instanceID: 3560}
+      Script: {instanceID: 3554}
     - Class: 114
-      Script: {instanceID: 3716}
+      Script: {instanceID: 3562}
     - Class: 114
-      Script: {instanceID: 3786}
+      Script: {instanceID: 3718}
     - Class: 114
-      Script: {instanceID: 3846}
+      Script: {instanceID: 3788}
     - Class: 114
-      Script: {instanceID: 3988}
+      Script: {instanceID: 3848}
     - Class: 114
       Script: {instanceID: 3990}
     - Class: 114
-      Script: {instanceID: 4136}
+      Script: {instanceID: 3992}
     - Class: 114
-      Script: {instanceID: 4158}
+      Script: {instanceID: 4138}
     - Class: 114
-      Script: {instanceID: 4252}
+      Script: {instanceID: 4160}
     - Class: 114
-      Script: {instanceID: 4350}
+      Script: {instanceID: 4178}
     - Class: 114
-      Script: {instanceID: 4382}
+      Script: {instanceID: 4256}
     - Class: 114
-      Script: {instanceID: 4420}
+      Script: {instanceID: 4354}
     - Class: 114
-      Script: {instanceID: 4514}
+      Script: {instanceID: 4386}
+    - Class: 114
+      Script: {instanceID: 4424}
     - Class: 114
       Script: {instanceID: 4518}
     - Class: 114
-      Script: {instanceID: 4596}
+      Script: {instanceID: 4522}
     - Class: 114
-      Script: {instanceID: 4708}
+      Script: {instanceID: 4600}
     - Class: 114
-      Script: {instanceID: 4822}
+      Script: {instanceID: 4712}
     - Class: 114
-      Script: {instanceID: 4882}
+      Script: {instanceID: 4826}
     - Class: 114
-      Script: {instanceID: 5080}
+      Script: {instanceID: 4886}
     - Class: 114
-      Script: {instanceID: 5364}
+      Script: {instanceID: 5084}
     - Class: 114
-      Script: {instanceID: 5466}
+      Script: {instanceID: 5368}
     - Class: 114
-      Script: {instanceID: 5544}
+      Script: {instanceID: 5470}
     - Class: 114
-      Script: {instanceID: 5596}
+      Script: {instanceID: 5548}
     - Class: 114
-      Script: {instanceID: 5724}
+      Script: {instanceID: 5600}
     - Class: 114
-      Script: {instanceID: 5744}
+      Script: {instanceID: 5728}
     - Class: 114
-      Script: {instanceID: 5794}
+      Script: {instanceID: 5748}
     - Class: 114
-      Script: {instanceID: 5858}
+      Script: {instanceID: 5798}
     - Class: 114
-      Script: {instanceID: 6026}
+      Script: {instanceID: 5862}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 6030}
     - Class: 114
-      Script: {instanceID: 6196}
+      Script: {instanceID: 6078}
     - Class: 114
-      Script: {instanceID: 6214}
+      Script: {instanceID: 6200}
     - Class: 114
-      Script: {instanceID: 6306}
+      Script: {instanceID: 6218}
     - Class: 114
-      Script: {instanceID: 6368}
+      Script: {instanceID: 6310}
     - Class: 114
-      Script: {instanceID: 6476}
+      Script: {instanceID: 6372}
     - Class: 114
-      Script: {instanceID: 6630}
+      Script: {instanceID: 6480}
     - Class: 114
-      Script: {instanceID: 102468}
-    - Class: 114
-      Script: {instanceID: 139558}
+      Script: {instanceID: 6634}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -606,6 +603,12 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
+      Hash: 07dd6aee9cc40a17a1ae57dad25cc37f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UIGroup
+  - hash:
+      serializedVersion: 2
       Hash: 1f0602e7bad1e0a9cba31ce292eee8bb
     assemblyName: Unity.RenderPipelines.Core.Runtime.dll
     namespaceName: UnityEngine.Rendering.UI
@@ -736,6 +739,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 334477fe3ac4bdbb9826cb6626b83f09
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HUD
   - hash:
       serializedVersion: 2
       Hash: ce66de8a2daf1f400e6c7f3516d2753e
@@ -1144,19 +1153,7 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
-  - hash:
-      serializedVersion: 2
-      Hash: 334477fe3ac4bdbb9826cb6626b83f09
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HUD
-  - hash:
-      serializedVersion: 2
-      Hash: 07dd6aee9cc40a17a1ae57dad25cc37f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UIGroup
   platform: 19
   scenePathNames:
   - Assets/Scenes/Desert.unity
-  playerPath: C:/Users/manhk/OneDrive/Desktop/CS205-Animation/CS205_Animation_Manny/CS205_Animation_Manny.exe
+  playerPath: C:/Users/manhk/OneDrive/Desktop/CS205-Animation/CS206_Animation_Manny/CS205_Animation_Manny.exe
